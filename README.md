@@ -83,7 +83,7 @@ for path, boxes in batch_results.items():
 ### Using Individual Components
 
 ```python
-from app.paddle_ocr import TextDetector, TextRecognizer, OCRConfig
+from .paddle_ocr import TextDetector, TextRecognizer, OCRConfig
 
 config = OCRConfig(use_gpu=True)
 
@@ -100,7 +100,7 @@ texts_and_scores = recognizer.recognize(crops)
 ### Preprocessing Utilities
 
 ```python
-from app.paddle_ocr.preprocessing import (
+from .paddle_ocr.preprocessing import (
     apply_clahe,
     scale_image_if_needed,
     generate_tiles,
@@ -121,13 +121,13 @@ for tile_img, x_offset, y_offset in tiles:
 ### Post-Processing
 
 ```python
-from app.paddle_ocr.postprocessing import postprocess, deduplicate_by_location
+from .paddle_ocr.postprocessing import postprocess, deduplicate_by_location
 
 # Full pipeline
 clean_boxes = postprocess(raw_boxes, min_confidence=0.3, dedup_distance=50)
 
 # Or individual steps
-from app.paddle_ocr.postprocessing import (
+from .paddle_ocr.postprocessing import (
     filter_by_confidence,
     filter_by_size,
     merge_horizontal_fragments,
@@ -138,7 +138,7 @@ from app.paddle_ocr.postprocessing import (
 ### Visualization
 
 ```python
-from app.paddle_ocr.visualization import draw_boxes, save_annotated
+from .paddle_ocr.visualization import draw_boxes, save_annotated
 
 annotated = draw_boxes(image, results, show_text=True, show_confidence=True)
 save_annotated(image, results, "debug_output.png")
